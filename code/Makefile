@@ -10,12 +10,24 @@ export LD_LIBRARY_PATH=/Users/ihelliounkhalid/Desktop/Devopstp3/code/lock_implem
 all : queue_test
 
 queue_test : $(OBJ) 
-	$(CC) $^ -o $@ $(LDFLAGS)
+	@$(CC) $^ -o $@ $(LDFLAGS)
 
 queue.o : queue.h
 
 %.o : %.c
-	$(CC) -c $^ $(CFLAGS)
+	@$(CC) -c $^ $(CFLAGS)
+
+test : lockimplementation code
+
+lockimplementation :
+	@cd lock_implementation ; \
+	make ; \
+	make clean ; \
+	cd ..
+
+code :
+	@make
+
 clean:
-	rm -rf *.o
+	@rm -rf *.o
 

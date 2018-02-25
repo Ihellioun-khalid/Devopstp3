@@ -6,14 +6,12 @@ SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
 
 sleepinglock:sleeping_lock.c
-	$(CC) -c $^ $(CFLAGS)
-	$(CC) -o $(TARGET) sleeping_lock.o $(LDFLAGS)
+	@$(CC) -c $^ $(CFLAGS)
+	@$(CC) -o $(TARGET) sleeping_lock.o $(LDFLAGS)
 
 spinlock:spin_lock.c
-	$(CC) -c $^ $(CFLAGS)
-	$(CC) -o $(TARGET) spin_lock.o $(LDFLAGS)
-
-
+	@$(CC) -c $^ $(CFLAGS)
+	@$(CC) -o $(TARGET) spin_lock.o $(LDFLAGS)
 
 clean:
-	rm -rf *.o
+	@rm -rf *.o
