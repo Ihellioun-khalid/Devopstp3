@@ -1,7 +1,12 @@
+CC = gcc
+CFLAGS = -O3 -fPIC -std=c99
+LDFLAGS= -lpthread -shared
+TARGET = libmylock.so
+
 sleepinglock:sleeping_lock.c
-	gcc -c sleeping_lock.c -O3 -fPIC
-	gcc -o libmylock.so sleeping_lock.o -lpthread -shared
+	$(CC) -c sleeping_lock.c $(CFLAGS)
+	$(CC) -o $(TARGET) sleeping_lock.o $(LDFLAGS)
 
 spinlock:spin_lock.c
-	gcc -c spin_lock.c -O3 -fPIC
-	gcc -o libmylock.so spin_lock.o -lpthread -shared
+	$(CC) -c spin_lock.c $(CFLAGS)
+	$(CC) -o $(TARGET) spin_lock.o $(LDFLAGS)
