@@ -2,20 +2,20 @@ CC = gcc
 CFLAGS = -O3 -fPIC -std=c99
 LDFLAGS= -lpthread -L./lock_implementation -lmylock -std=c99
 TARGET= queue_test
+SRC=$(wildcard *.c)
+OBJ=$(SRC:.c=.o)
+
 export LD_LIBRARY_PATH=/Users/ihelliounkhalid/Desktop/Devopstp3/code/lock_implementation:$LD_LIBRARY_PATH
+
 all : queue_test
 
-queue_test : main.o queue.o 
-	$(CC) main.o queue.o -o queue_test $(LDFLAGS)
+queue_test : $(OBJ) 
+	$(CC) $^ -o $@ $(LDFLAGS)
 
-queue.o : queue.c queue.h
-	$(CC) -c queue.c queue.h $(CFLAGS)
+queue.o : queue.h
 
-main.o : main.c
-	$(CC) -c main.c $(CFLAGS)
-
+%.o : %.c
+	$(CC) -c $^ $(CFLAGS)
 clean:
-    rm -rf *.o $(EXEC)
-
-
+	rm -rf *.o
 
