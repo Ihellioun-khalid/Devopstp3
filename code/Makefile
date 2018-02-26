@@ -9,7 +9,7 @@ export LD_LIBRARY_PATH=/Users/ihelliounkhalid/Desktop/Devopstp3/code/lock_implem
 
 all : queue_test
 
-queue_test : $(OBJ) 
+queue_test : $(OBJ)
 	@$(CC) $^ -o $@ $(LDFLAGS)
 
 queue.o : queue.h
@@ -20,14 +20,29 @@ queue.o : queue.h
 test : lockimplementation code
 
 lockimplementation :
+ifeq ($(TEST),spinlock)
+	@cd lock_implementation ; \
+	make spinlock ; \
+	make clean
+	@cd ..
+endif
+ifeq ($(TEST),sleepinglock)
+	@cd lock_implementation ; \
+	make sleepinglock ; \
+	make clean
+	@cd ..
+endif
+ifeq ($(TEST),)
 	@cd lock_implementation ; \
 	make ; \
-	make clean ; \
-	cd ..
-
+	make clean
+	@cd ..
+endif
 code :
-	@make
-
+	@make all
+	@make clean
+ifneq ($(NB_THREADS),)
+	./queue_test
+endif
 clean:
 	@rm -rf *.o
-

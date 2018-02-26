@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
         }
     }
     
-    /* wait for everyone to initialize, then set the alarm */
+     wait for everyone to initialize, then set the alarm 
     int ret = pthread_barrier_wait(&init_barr);
     if (ret != 0 && ret != PTHREAD_BARRIER_SERIAL_THREAD){
         fprintf(stderr, "Waiting on the barrier failed!\n");
