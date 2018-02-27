@@ -1,18 +1,17 @@
+#Ihellioun khalid et Ahmed sarraj
 CC = gcc
-CFLAGS = -O3 -fPIC -std=c99
-LDFLAGS= -lpthread -L./lock_implementation -lmylock -std=c99
+CFLAGS = -O3 -fPIC
+LDFLAGS= -lpthread -L./lock_implementation -lmylock
 TARGET= queue_test
 SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
 
-export LD_LIBRARY_PATH=/Users/ihelliounkhalid/Desktop/Devopstp3/code/lock_implementation:$LD_LIBRARY_PATH
-
-all : queue_test
+all : $(TARGET)
 
 queue_test : $(OBJ)
 	@$(CC) $^ -o $@ $(LDFLAGS)
 
-queue.o : queue.h
+main.o : queue.h
 
 %.o : %.c
 	@$(CC) -c $^ $(CFLAGS)
@@ -41,8 +40,16 @@ endif
 code :
 	@make all
 	@make clean
+
 ifneq ($(NB_THREADS),)
 	./queue_test
+	@make mrpropre
 endif
-clean:
+
+clean :
 	@rm -rf *.o
+	@rm -rf *.h.gch
+mrpropre :
+	make clean
+	@rm -rf queue_test
+

@@ -8,10 +8,11 @@ OBJ=$(SRC:.c=.o)
 sleepinglock:sleeping_lock.c
 	@$(CC) -c $^ $(CFLAGS)
 	@$(CC) -o $(TARGET) sleeping_lock.o $(LDFLAGS)
+	@make clean
 
 spinlock:spin_lock.c
 	@$(CC) -c $^ $(CFLAGS)
-	@$(CC) -o $(TARGET) spin_lock.o $(LDFLAGS)
-
+	@$(CC) -o $(TARGET) spin_lock.c $(LDFLAGS)
+	@make clean
 clean:
 	@rm -rf *.o
